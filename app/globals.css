@@ -1,0 +1,83 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', 'Space Grotesk', 'system-ui', 'sans-serif';
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', 'Courier New', 'monospace';
+  --color-bg-primary: #0a0e14;
+  --color-bg-dark: #050709;
+  --color-cyan: #22d3ee;
+  --color-saffron: #ff9933;
+  --color-text-primary: #e8ecf1;
+  --color-text-secondary: #8b92a1;
+  --color-glass-light: rgb(232 236 241 / 0.04);
+  --color-glass-border: rgb(34 211 238 / 0.2);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap');
+
+  :root {
+    color-scheme: dark;
+    --background: #0a0e14;
+    --foreground: #e8ecf1;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-bg-primary text-text-primary font-sans antialiased;
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-glass-light backdrop-blur-md border border-glass-border rounded-lg;
+  }
+
+  .glass-card-sm {
+    @apply bg-glass-light backdrop-blur-md border border-glass-border rounded-md;
+  }
+
+  .section-label {
+    @apply font-mono text-xs font-medium tracking-wider text-cyan uppercase;
+  }
+
+  .terminal-text {
+    @apply font-mono text-sm;
+  }
+
+  .glow-cyan {
+    @apply text-cyan shadow-lg shadow-cyan/20;
+  }
+
+  .glow-saffron {
+    @apply text-saffron shadow-lg shadow-saffron/20;
+  }
+
+  .cursor-blink {
+    animation: cursor-blink 1.2s infinite;
+  }
+
+  @keyframes cursor-blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+}
