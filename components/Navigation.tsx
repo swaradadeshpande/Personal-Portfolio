@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { ModernIcons } from './Icons'
 
 export default function Navigation() {
   const [activeSection, setActiveSection] = useState('hero')
@@ -10,14 +11,14 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
 
   const sections = [
-    { id: 'hero', label: 'Home', icon: '🏠' },
-    { id: 'about', label: 'About', icon: '👤' },
-    { id: 'work', label: 'Experience', icon: '💼' },
-    { id: 'projects', label: 'Projects', icon: '📁' },
-    { id: 'skills', label: 'Skills', icon: '🛠️' },
-    { id: 'certifications', label: 'Certifications', icon: '🎓' },
-    { id: 'achievements', label: 'Achievements', icon: '🏆' },
-    { id: 'contact', label: 'Contact', icon: '📧' },
+    { id: 'hero', label: 'Home', iconKey: 'Home' as const },
+    { id: 'about', label: 'About', iconKey: 'About' as const },
+    { id: 'work', label: 'Experience', iconKey: 'Experience' as const },
+    { id: 'projects', label: 'Projects', iconKey: 'Projects' as const },
+    { id: 'skills', label: 'Skills', iconKey: 'Skills' as const },
+    { id: 'certifications', label: 'Certifications', iconKey: 'Certifications' as const },
+    { id: 'achievements', label: 'Achievements', iconKey: 'Achievements' as const },
+    { id: 'contact', label: 'Contact', iconKey: 'Contact' as const },
   ]
 
   useEffect(() => {
@@ -67,21 +68,26 @@ export default function Navigation() {
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center gap-1 lg:gap-2">
-            {sections.map((section) => (
-              <motion.button
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className={`text-sm terminal-text font-medium transition-colors duration-300 px-3 py-2 rounded-lg flex items-center gap-2 ${
-                  activeSection === section.id
-                    ? 'text-cyan bg-cyan/10'
-                    : 'text-text-secondary hover:text-cyan hover:bg-cyan/5'
-                }`}
-                whileHover={{ scale: 1.05 }}
-              >
-                <span>{section.icon}</span>
-                <span className="hidden lg:inline">{section.label}</span>
-              </motion.button>
-            ))}
+            {sections.map((section) => {
+              const IconComponent = ModernIcons[section.iconKey]
+              return (
+                <motion.button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className={`text-sm terminal-text font-medium transition-colors duration-300 px-3 py-2 rounded-lg flex items-center gap-2 ${
+                    activeSection === section.id
+                      ? 'text-cyan bg-cyan/10'
+                      : 'text-text-secondary hover:text-cyan hover:bg-cyan/5'
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="w-5 h-5">
+                    <IconComponent />
+                  </div>
+                  <span className="hidden lg:inline">{section.label}</span>
+                </motion.button>
+              )
+            })}
           </div>
 
           {/* Mobile menu button */}
@@ -102,21 +108,26 @@ export default function Navigation() {
             exit={{ opacity: 0, y: -10 }}
             className="md:hidden mt-4 space-y-2 pb-4 max-h-96 overflow-y-auto"
           >
-            {sections.map((section) => (
-              <motion.button
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className={`flex w-full items-center gap-3 text-left px-4 py-3 rounded-lg terminal-text text-sm font-medium transition-colors duration-300 ${
-                  activeSection === section.id
-                    ? 'bg-cyan/10 text-cyan'
-                    : 'text-text-secondary hover:bg-glass-light hover:text-cyan'
-                }`}
-                whileHover={{ x: 4 }}
-              >
-                <span className="text-lg">{section.icon}</span>
-                {section.label}
-              </motion.button>
-            ))}
+            {sections.map((section) => {
+              const IconComponent = ModernIcons[section.iconKey]
+              return (
+                <motion.button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className={`flex w-full items-center gap-3 text-left px-4 py-3 rounded-lg terminal-text text-sm font-medium transition-colors duration-300 ${
+                    activeSection === section.id
+                      ? 'bg-cyan/10 text-cyan'
+                      : 'text-text-secondary hover:bg-glass-light hover:text-cyan'
+                  }`}
+                  whileHover={{ x: 4 }}
+                >
+                  <div className="w-5 h-5">
+                    <IconComponent />
+                  </div>
+                  {section.label}
+                </motion.button>
+              )
+            })}
           </motion.div>
         )}
       </div>

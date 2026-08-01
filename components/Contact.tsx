@@ -1,26 +1,27 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Share2, Code, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { ModernIcons } from './Icons'
 
 export default function Contact() {
   const contacts = [
     {
-      icon: Mail,
+      iconKey: 'Email' as const,
       label: 'Email',
       value: 'hello@swarada.dev',
       href: 'mailto:hello@swarada.dev',
       color: 'cyan',
     },
     {
-      icon: Share2,
+      iconKey: 'LinkedIn' as const,
       label: 'LinkedIn',
       value: '/in/swarada-deshpande',
       href: 'https://linkedin.com/in/swarada-deshpande',
       color: 'saffron',
     },
     {
-      icon: Code,
+      iconKey: 'GitHub' as const,
       label: 'GitHub',
       value: '@swarada-dev',
       href: 'https://github.com',
@@ -81,7 +82,7 @@ export default function Contact() {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
           >
             {contacts.map((contact, i) => {
-              const IconComponent = contact.icon
+              const IconComponent = ModernIcons[contact.iconKey]
               return (
                 <motion.a
                   key={i}
@@ -92,7 +93,7 @@ export default function Contact() {
                   className="group"
                 >
                   <motion.div
-                    className={`glass-card p-6 rounded-lg flex items-center gap-4 cursor-pointer hover:border-${contact.color}/50 transition-all duration-300`}
+                    className={`glass-card p-6 rounded-lg flex items-center gap-4 cursor-pointer transition-all duration-300`}
                     whileHover={{ scale: 1.02, x: 8 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -102,9 +103,11 @@ export default function Contact() {
                       }`}
                       whileHover={{ scale: 1.2, rotate: -5 }}
                     >
-                      <IconComponent
+                      <div
                         className={`w-6 h-6 ${contact.color === 'cyan' ? 'text-cyan' : 'text-saffron'}`}
-                      />
+                      >
+                        <IconComponent />
+                      </div>
                     </motion.div>
                     <div className="flex-1">
                       <p className="text-sm text-text-secondary">{contact.label}</p>
@@ -127,24 +130,29 @@ export default function Contact() {
             <h3 className="text-lg font-bold text-text-primary">Quick Links</h3>
             <div className="flex flex-wrap gap-3">
               {[
-                { text: 'Download Resume', icon: '📄', color: 'cyan' },
-                { text: 'View GitHub', icon: '💻', color: 'saffron' },
-                { text: 'LinkedIn Profile', icon: '🔗', color: 'cyan' },
-              ].map((link, i) => (
-                <motion.button
-                  key={i}
-                  className={`px-4 py-2 rounded-lg glass-card terminal-text text-sm font-semibold flex items-center gap-2 transition-all ${
-                    link.color === 'cyan'
-                      ? 'text-cyan hover:bg-cyan/10 border border-cyan/30'
-                      : 'text-saffron hover:bg-saffron/10 border border-saffron/30'
-                  }`}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span>{link.icon}</span>
-                  {link.text}
-                </motion.button>
-              ))}
+                { text: 'Download Resume', iconKey: 'Code2' as const, color: 'cyan' },
+                { text: 'View GitHub', iconKey: 'GitHub' as const, color: 'saffron' },
+                { text: 'LinkedIn Profile', iconKey: 'LinkedIn' as const, color: 'cyan' },
+              ].map((link, i) => {
+                const IconComponent = ModernIcons[link.iconKey]
+                return (
+                  <motion.button
+                    key={i}
+                    className={`px-4 py-2 rounded-lg glass-card terminal-text text-sm font-semibold flex items-center gap-2 transition-all ${
+                      link.color === 'cyan'
+                        ? 'text-cyan hover:bg-cyan/10 border border-cyan/30'
+                        : 'text-saffron hover:bg-saffron/10 border border-saffron/30'
+                    }`}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <div className="w-4 h-4">
+                      <IconComponent />
+                    </div>
+                    {link.text}
+                  </motion.button>
+                )
+              })}
             </div>
           </motion.div>
         </motion.div>
@@ -172,7 +180,7 @@ export default function Contact() {
         <div className="mt-8 pt-6 border-t border-glass-border text-xs text-text-secondary text-center space-y-2">
           <p>© 2026 Swarada Deshpande. All rights reserved.</p>
           <p className="terminal-text">
-            Made with <span className="text-cyan cursor-pointer hover:animate-pulse">💙</span> in Pune, India
+            Made with <span className="text-cyan font-semibold">passion</span> in Pune, India
           </p>
         </div>
       </motion.footer>

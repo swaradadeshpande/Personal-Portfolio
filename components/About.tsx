@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { ModernIcons } from './Icons'
 
 export default function About() {
   const containerVariants = {
@@ -21,17 +22,17 @@ export default function About() {
 
   const paragraphs = [
     {
-      icon: '⚙️',
+      iconKey: 'Build' as const,
       title: 'Building Systems That Work',
       text: 'I believe in building systems that work. Not just technically correct—actually usable, scalable, and elegant. That\'s why I split my focus between backend infrastructure and machine learning pipelines.',
     },
     {
-      icon: '🤖',
+      iconKey: 'ML' as const,
       title: 'ML Systems in Production',
       text: 'I\'ve spent the last year building end-to-end ML applications—training models, optimizing inference, designing APIs, and shipping features that doctors and engineers actually rely on.',
     },
     {
-      icon: '💃',
+      iconKey: 'Dance' as const,
       title: 'Precision Through Discipline',
       text: 'On the side, I\'ve trained in Bharatanatyam for four years—a classical Indian dance that demands precision, discipline, and structural thinking. The same principles apply to code.',
     },
@@ -83,11 +84,11 @@ export default function About() {
                   <div className="relative z-10 flex flex-col h-full">
                     {/* Icon */}
                     <motion.div
-                      className="text-4xl mb-4"
+                      className="w-8 h-8 mb-4 text-cyan"
                       whileHover={{ scale: 1.2, rotate: -10 }}
                       transition={{ type: 'spring', stiffness: 200 }}
                     >
-                      {para.icon}
+                      {ModernIcons[para.iconKey]()}
                     </motion.div>
 
                     {/* Title */}

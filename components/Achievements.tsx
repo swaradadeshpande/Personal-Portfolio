@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Trophy, Award } from 'lucide-react'
+import { ModernIcons } from './Icons'
 
 export default function Achievements() {
   const achievements = [
@@ -10,7 +10,7 @@ export default function Achievements() {
       title: 'National Level MedTech Hackathon Nexus Aescode',
       org: 'Bharati Vidyapeeth DU x KCDH IIT Bombay',
       year: '2024–2025',
-      icon: Trophy,
+      iconKey: 'Trophy' as const,
     },
     {
       rank: '2nd Prize',
@@ -18,21 +18,21 @@ export default function Achievements() {
       org: 'Universidad Nacional del Altiplano de Puno, Peru',
       year: '2024',
       prize: '$500 Prize',
-      icon: Award,
+      iconKey: 'Trophy' as const,
     },
     {
       rank: '2nd Prize',
       title: 'National Level Hackathon OFFGRID 1.0',
       org: 'D. Y. Patil International University',
       year: '2024',
-      icon: Award,
+      iconKey: 'Trophy' as const,
     },
     {
       rank: 'Rank 2',
       title: 'Code Debugging Competition',
       org: 'IEEE Student Branch BIT',
       year: '2024',
-      icon: Trophy,
+      iconKey: 'Trophy' as const,
     },
   ]
 
@@ -87,7 +87,6 @@ export default function Achievements() {
             className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-4"
           >
             {achievements.map((achievement, i) => {
-              const IconComponent = achievement.icon
               return (
                 <motion.div
                   key={i}
@@ -101,10 +100,10 @@ export default function Achievements() {
                     {/* Icon and rank */}
                     <div className="flex items-start justify-between mb-4">
                       <motion.div
-                        className="p-3 bg-cyan/10 rounded-lg"
+                        className="p-3 bg-cyan/10 rounded-lg w-10 h-10 flex items-center justify-center text-cyan"
                         whileHover={{ scale: 1.2, rotate: 5 }}
                       >
-                        <IconComponent className="w-6 h-6 text-cyan" />
+                        {ModernIcons[achievement.iconKey]()}
                       </motion.div>
                       <span className="text-xs font-bold px-3 py-1 bg-saffron/10 text-saffron rounded-full terminal-text">
                         {achievement.rank}
@@ -136,16 +135,16 @@ export default function Achievements() {
             className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8"
           >
             {[
-              { number: '4', label: 'Major Hackathon Awards', icon: '🏆' },
-              { number: '3', label: 'First Place Finishes', icon: '🥇' },
-              { number: '15K+', label: 'Lines of Code Shipped', icon: '💻' },
+              { number: '4', label: 'Major Hackathon Awards', iconKey: 'Trophy' as const },
+              { number: '3', label: 'First Place Finishes', iconKey: 'Trophy' as const },
+              { number: '15K+', label: 'Lines of Code Shipped', iconKey: 'Code2' as const },
             ].map((stat, i) => (
               <motion.div
                 key={i}
                 className="glass-card p-6 rounded-lg text-center"
                 whileHover={{ scale: 1.05 }}
               >
-                <div className="text-4xl mb-2">{stat.icon}</div>
+                <div className="w-8 h-8 mx-auto mb-2 text-cyan">{ModernIcons[stat.iconKey]()}</div>
                 <div className="text-2xl font-bold text-cyan mb-2">{stat.number}</div>
                 <div className="text-sm text-text-secondary">{stat.label}</div>
               </motion.div>

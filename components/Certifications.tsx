@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { ModernIcons } from './Icons'
 
 export default function Certifications() {
   const certifications = [
@@ -8,7 +9,7 @@ export default function Certifications() {
       title: 'Python Programming',
       issuer: 'Udemy',
       date: '2024',
-      icon: '🐍',
+      iconKey: 'Python' as const,
       color: 'cyan',
       skills: ['Python', 'OOP', 'Data Structures'],
     },
@@ -16,7 +17,7 @@ export default function Certifications() {
       title: 'Data Analytics Essentials',
       issuer: 'Cisco',
       date: '2024',
-      icon: '📊',
+      iconKey: 'Analytics' as const,
       color: 'saffron',
       skills: ['Analytics', 'SQL', 'Visualization'],
     },
@@ -24,7 +25,7 @@ export default function Certifications() {
       title: 'Machine Learning Fundamentals',
       issuer: 'Coursera',
       date: '2023',
-      icon: '🤖',
+      iconKey: 'ML' as const,
       color: 'cyan',
       skills: ['ML', 'Scikit-learn', 'Pandas'],
     },
@@ -32,7 +33,7 @@ export default function Certifications() {
       title: 'Backend Development with FastAPI',
       issuer: 'Udemy',
       date: '2024',
-      icon: '⚡',
+      iconKey: 'FastAPI' as const,
       color: 'saffron',
       skills: ['FastAPI', 'REST APIs', 'Async'],
     },
@@ -40,7 +41,7 @@ export default function Certifications() {
       title: 'Cloud Computing Basics',
       issuer: 'AWS',
       date: '2023',
-      icon: '☁️',
+      iconKey: 'Cloud' as const,
       color: 'cyan',
       skills: ['AWS', 'EC2', 'S3'],
     },
@@ -48,7 +49,7 @@ export default function Certifications() {
       title: 'Web Development Advanced',
       issuer: 'Udemy',
       date: '2024',
-      icon: '🌐',
+      iconKey: 'Web' as const,
       color: 'saffron',
       skills: ['React', 'Next.js', 'TypeScript'],
     },
@@ -124,7 +125,7 @@ export default function Certifications() {
                   <div className="relative z-10 flex flex-col h-full">
                     {/* Icon and header */}
                     <div className="flex items-start justify-between mb-4">
-                      <div className="text-4xl">{cert.icon}</div>
+                      <div className={`w-8 h-8 ${cert.color === 'cyan' ? 'text-cyan' : 'text-saffron'}`}>{ModernIcons[cert.iconKey]()}</div>
                       <motion.span
                         className={`text-xs font-semibold px-3 py-1 rounded-full glass-card ${
                           cert.color === 'cyan'
